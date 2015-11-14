@@ -4,9 +4,9 @@ import os
 import sys
 
 try:
-    from setuptools import setup, Command, find_packages
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup, Command, find_packages
+    from distutils.core import setup, find_packages
 
 
 __version__ = "0.0.1"
@@ -24,7 +24,6 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 requirements = [
-    'argparse==1.1',
     'BeautifulSoup==3.2.1',
     'requests==2.7.0',
 ]
@@ -33,46 +32,25 @@ requirements = [
 long_description = open('README.md').read() + "\n\n"
 
 
-class PyTest(Command):
-    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
-
-    def initialize_options(self):
-        self.pytest_args = []
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
-
-
-class PyTestCoverage(PyTest):
-
-    def initialize_options(self):
-        self.pytest_args = ['--cov', 'passpie']
-
-
 setup(
-    name='passpie',
+    name='vocabpie',
     version=__version__,
     license='License :: OSI Approved :: MIT License',
-    description="Manage your login credentials from the terminal painlessly.",
+    description="Look up dictionary definitions, etymology references, and synonym/antonyms of words.",
     long_description=long_description,
-    author='Marcwebbie',
-    author_email='marcwebbie@gmail.com',
-    url='https://marcwebbie.github.io/passpie',
-    download_url='https://github.com/marcwebbie/passpie',
+    author='DietrichWambach',
+    author_email='dietrich.wambach@protonmail.ch',
+    url='https://github.com/wamsachel/vocabpie',
+    download_url='https://github.com/wamsachel/vocabpie',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'passpie=passpie.cli:cli',
+            'etym=src.etym',
+            'thes=src.thes',
+            'dict=src.dict',
         ]
     },
     install_requires=requirements,
-    cmdclass={'test': PyTest, 'coverage': PyTestCoverage},
-    test_suite='tests',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -87,6 +65,6 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Programming Language :: Python',
-        'Topic :: Security :: Cryptography',
+        'Topic :: Utilities',
     ],
 )
