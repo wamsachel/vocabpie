@@ -31,7 +31,8 @@ def dict_term(term_keyword, antonym = False):
         raise Exception('[!] Error when soupifying dict_document')
     return ret_list
 
-if __name__ == '__main__':
+
+def run_dict():
     # Parse commandline arguments
     try:
         dict_arg_parser = argparse.ArgumentParser()
@@ -52,4 +53,6 @@ if __name__ == '__main__':
     for index in xrange(len(dict_entries)):
         def_str = dict_entries[index][0].upper() + dict_entries[index][1:]
         print '{i}. {d}\n'.format(i = index + 1, d = def_str)
-    
+
+if __name__ == '__main__':
+    run_dict()

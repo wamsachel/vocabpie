@@ -9,7 +9,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 
 if sys.argv[-1] == 'publish':
@@ -42,14 +42,11 @@ setup(
     author_email='dietrich.wambach@protonmail.ch',
     url='https://github.com/wamsachel/vocabpie',
     download_url='https://github.com/wamsachel/vocabpie',
-    packages=find_packages(),
-    entry_points={
-        'console_scripts': [
-            'etym=src.etym',
-            'thes=src.thes',
-            'dict=src.dict',
-        ]
-    },
+    #packages = find_packages(),
+    packages = ['vocabpie'],
+    # scripts = ['bin/etym', 'bin/dict', 'bin/thes'],
+    # scripts = ['bin/etym', 'bin/dict', 'bin/thes'],
+    # entry_points = {'console_scripts': ['dict = vocabpie.dictionary:run_dict',]},
     install_requires=requirements,
     classifiers=[
         'Development Status :: 4 - Beta',
